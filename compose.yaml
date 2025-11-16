@@ -1,0 +1,63 @@
+networks:
+  demo-network:
+    driver: bridge
+
+
+volumes:
+  demo-postgres-data:
+
+
+services:
+  demo-postgres:
+    image: postgres:16
+    container_name: demo-postgres
+    restart: unless-stopped
+    networks: [ demo-network ]
+    environment:
+      POSTGRES_DB: "pg_db"
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "pg_pass"
+      PGDATA: /var/lib/postgresql/data/pgdata
+      TZ: "Europe/Kyiv"
+    command: ["postgres", "-c", "timezone=Europe/Kyiv"]
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - demo-postgres-data:/var/lib/postgresql/data
+#    healthcheck:
+#      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
+#      interval: 5s
+#      timeout: 3s
+#      retries: 20
+
+
+  demo-redis:
+    image: redis:8.2.1
+    container_name: demo-redis
+    restart: unless-stopped
+    networks: [ demo-network ]
+    labels: [ 'com.centurylinklabs.watchtower.enable=false' ]
+    ports:
+      - '127.0.0.1:6379:6379'
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_USER: ${REDIS_USER}
+      REDIS_USER_PASSWORD: PASSWORD=${REDIS_USER_PASSWORD}
+    command: >
+      sh -c '
+        mkdir -p /usr/local/etc/redis &&
+        echo "bind 0.0.0.0" > /usr/local/etc/redis/redis.conf &&
+        echo "requirepass $REDIS_PASSWORD" >> /usr/local/etc/redis/redis.conf &&
+        echo "appendonly yes" >> /usr/local/etc/redis/redis.conf &&
+        echo "appendfsync everysec" >> /usr/local/etc/redis/redis.conf &&
+        echo "user default on nopass ~* +@all" > /usr/local/etc/redis/users.acl &&
+        echo "user $REDIS_USER on >$REDIS_USER_PASSWORD ~* +@all" >> /usr/local/etc/redis/users.acl &&
+        redis-server /usr/local/etc/redis/redis.conf --aclfile /usr/local/etc/redis/users.acl
+      '
+    healthcheck:
+      test: [ "CMD-SHELL", "redis-cli -u redis://$REDIS_USER:$REDIS_USER_PASSWORD@127.0.0.1:6379 PING | grep PONG" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+
