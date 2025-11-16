@@ -44,9 +44,9 @@ Running the Spring Boot Application
 ⚠️ Important for Windows Users
 
 To avoid timezone issues with PostgreSQL, add this JVM option:
-
+```
 -Duser.timezone=Europe/Kyiv
-
+```
 Example (IntelliJ IDEA)
 
 Run > Edit Configurations > VM Options:
