@@ -22,7 +22,7 @@ All services run inside the `demo-network` Docker network.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-name/redis-demo.git
+git clone https://github.com/maksimtest/redis-demo.git
 cd redis-demo
 ```
 
@@ -40,7 +40,7 @@ Redis on localhost:6379
 Spring Boot app on localhost:8080 (when you start it)
 
 ---
-Running the Spring Boot Application
+## 🚀 Running the Spring Boot Application
 ⚠️ Important for Windows Users
 
 To avoid timezone issues with PostgreSQL, add this JVM option:
@@ -57,7 +57,7 @@ Example (command line)
 java -Duser.timezone=Europe/Kyiv -jar redis-demo.jar
 
 ---
-Available Endpoints
+## 🚀 Available Endpoints
 1. Initialize database with sample data
 GET http://localhost:8080/init
 
@@ -76,25 +76,29 @@ Content-Type: application/json
 
 Payload uses BookRsData.
 ---
-🧰 Redis CLI Usage
+## 🧰 Redis CLI Usage
 Enter Redis CLI inside the container
+```
 docker exec -it demo-redis redis-cli
-
+```
 
 If a password is required:
 
 docker exec -it demo-redis redis-cli -a YOUR_PASSWORD
 ---
-🔧 Useful Redis Commands
+## 🔧 Useful Redis Commands
 Get all keys related to books
+```
 keys book::*
-
+```
 Get value by key
+```
 get <key>
-
+```
 Remove all data from Redis
+```
 flushall
-
+```
 
 ⚠️ Warning: flushall deletes all keys in all databases.
 ---
