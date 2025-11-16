@@ -1,0 +1,26 @@
+server.port: 8080
+
+spring:
+  application.name: "redis-demo"
+  docker.compose:
+    file: ./compose.yaml
+    enabled: true
+  jpa:
+    hibernate:
+        ddl-auto: create-drop
+    show-sql: true
+  cache:
+    type: redis
+    redis:
+      time-to-live: 1h
+      cache-null-values: false
+      use-key-prefix: false
+  data.redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    database: 0
+    username: ${REDIS_USER}
+    password: ${REDIS_USER_PASSWORD}
+    timeout: 5s
+    ssl.enabled: false
+
