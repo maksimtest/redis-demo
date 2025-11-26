@@ -2,10 +2,8 @@ networks:
   demo-network:
     driver: bridge
 
-
 volumes:
   demo-postgres-data:
-
 
 services:
   demo-postgres:
