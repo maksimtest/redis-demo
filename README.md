@@ -35,6 +35,12 @@ This starts:
 - Redis on localhost:6379
 - Spring Boot app on localhost:8080 (when you start it)
 
+## 🚀 Stop Docker containers
+```
+docker compose down
+```
+This commands stopped and removed containers
+
 ---
 ## 🚀 Running the Spring Boot Application
 ⚠️ Important for Windows Users
@@ -60,7 +66,10 @@ GET http://localhost:8080/init
 2. Get list of all Book entities
 GET http://localhost:8080/book
 
-3. Create a new Book
+3. Get Book entity by bookId
+   GET http://localhost:8080/book/bookId
+
+4. Create a new Book
 POST http://localhost:8080/book
 Content-Type: application/json
 {

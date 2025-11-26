@@ -4,10 +4,7 @@ import com.redisdemo.entity.Book
 import com.redisdemo.payloads.BookRsData
 import com.redisdemo.service.BookService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/book")
@@ -21,7 +18,7 @@ class BookRestController {
     }
 
     @GetMapping("/{bookId}")
-    fun showById(bookId: Long): Book? {
+    fun showById(@PathVariable("bookId") bookId: Long): Book? {
         return bookService.showById(bookId)
     }
 
