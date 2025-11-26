@@ -23,7 +23,6 @@ All services run inside the `demo-network` Docker network.
 
 ```bash
 git clone https://github.com/maksimtest/redis-demo.git
-cd redis-demo
 ```
 
 ## 🚀 Run Docker containers
@@ -67,24 +66,17 @@ GET http://localhost:8080/book
 3. Create a new Book
 POST http://localhost:8080/book
 Content-Type: application/json
-
 {
   "title": "Sample Book",
   "author": "John Doe"
 }
 
-
-Payload uses BookRsData.
 ---
 ## 🧰 Redis CLI Usage
 Enter Redis CLI inside the container
 ```
 docker exec -it demo-redis redis-cli
 ```
-
-If a password is required:
-
-docker exec -it demo-redis redis-cli -a YOUR_PASSWORD
 ---
 ## 🔧 Useful Redis Commands
 Get all keys related to books
@@ -105,23 +97,7 @@ flushall
 ✔️ Summary
 
 This project demonstrates how to:
-
-Use Redis as a cache in Spring Boot
-
-Run PostgreSQL and Redis inside Docker
-
-Create and read Book entities
-
-Manage Redis keys from the command line
-
-If you'd like, I can also generate:
-
-UML diagrams
-
-Postman collection
-
-Swagger documentation
-
-Example tests
-
-Just say the word!
+- Use Redis as a cache in Spring Boot
+- Run PostgresSQL and Redis inside Docker
+- Create and read Book entities
+- Manage Redis keys from the command line
