@@ -13,22 +13,7 @@ import java.time.Duration
 
 @Configuration
 class RedisConfig {
-//
-//    @Bean
-//    fun redisTemplate(connectionFactory: RedisConnectionFactory): RedisTemplate<String, Any> {
-//        val keySer = StringRedisSerializer()
-//        val valueSer = GenericJackson2JsonRedisSerializer()
-//
-//        return RedisTemplate<String, Any>().apply {
-//            setConnectionFactory(connectionFactory)
-//            keySerializer = keySer
-//            hashKeySerializer = keySer
-//            valueSerializer = valueSer
-//            hashValueSerializer = valueSer
-//            afterPropertiesSet()
-//        }
-//    }
-//
+
     @Bean
     fun cacheManager(connectionFactory: RedisConnectionFactory): CacheManager {
         val keySer = StringRedisSerializer()
@@ -44,5 +29,4 @@ class RedisConfig {
             .transactionAware()
             .build()
     }
-
 }

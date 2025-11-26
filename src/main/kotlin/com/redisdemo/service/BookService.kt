@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import kotlin.jvm.optionals.getOrNull
 
 @Service
 class BookService {
@@ -22,8 +23,10 @@ class BookService {
 
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = ["book"], key = "{#bookId}")
-    fun showById(bookId: Long): List<Book> {
-        return bookRepository.findAll()
+    fun showById(bookId: Long): Book? {
+        return bookRepository
+            .findById(bookId)
+            .getOrNull()
     }
 
     @Transactional

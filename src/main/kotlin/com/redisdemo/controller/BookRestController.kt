@@ -16,12 +16,17 @@ class BookRestController {
     private lateinit var bookService: BookService
 
     @GetMapping
-    fun show():List<Book> {
+    fun show(): List<Book> {
         return bookService.show()
     }
 
+    @GetMapping("/{bookId}")
+    fun showById(bookId: Long): Book? {
+        return bookService.showById(bookId)
+    }
+
     @PostMapping
-    fun create(payload: BookRsData):String {
+    fun create(payload: BookRsData): String {
         bookService.create(payload)
         return "Ok"
     }

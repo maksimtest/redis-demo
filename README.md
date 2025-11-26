@@ -31,12 +31,9 @@ docker compose up -d
 ```
 
 This starts:
-
-PostgreSQL on localhost:5433
-
-Redis on localhost:6379
-
-Spring Boot app on localhost:8080 (when you start it)
+- PostgreSQL on localhost:5433
+- Redis on localhost:6379
+- Spring Boot app on localhost:8080 (when you start it)
 
 ---
 ## 🚀 Running the Spring Boot Application
